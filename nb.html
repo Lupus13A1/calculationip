@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Network IP&Broadcast IP</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Calculation subnetMask </a></li>
+                <li><a href="IP Address Generator.html">Generator IP</a></li>
+                <li><a href="IP Calculation.html">IP&Binary</a></li>
+                <li><a href="nb.html">N&B</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>หา Network IP และ Broadcast IP</h1>
+    <label for="ipInput">Enter IP Address (e.g., 89.45.77.55/19):</label>
+    <input type="text" id="ipInput">
+
+    <h4>Output:</h4>
+    <p id="binaryOutput">Binary: </p>
+    <p id="subnetMaskOutput">Subnet Mask: </p>
+    <p id="networkIPOutput">Network IP: </p>
+    <p id="broadcastIPOutput">Broadcast IP: </p>
+
+    <script>
+        // Function to calculate and update the subnet information
+        function updateSubnetInfo() {
+            const input = document.getElementById("ipInput").value;
+            const [ip, cidr] = input.split("/");
+
+            // Calculate subnet mask in binary
+            const subnetMaskBinary = "1".repeat(cidr).padEnd(32, "0");
+            const subnetMask = convertBinaryToIP(subnetMaskBinary);
+
+            // Calculate network and broadcast IPs
+            const ipBinary = convertIPToBinary(ip);
+            const networkIPBinary = ipBinary.substr(0, cidr).padEnd(32, "0");
+            const broadcastIPBinary = ipBinary.substr(0, cidr).padEnd(32, "1");
+            const networkIP = convertBinaryToIP(networkIPBinary);
+            const broadcastIP = convertBinaryToIP(broadcastIPBinary);
+
+            // Output results
+            document.getElementById("binaryOutput").textContent = `Binary: ${subnetMaskBinary.slice(0, 8)}.${subnetMaskBinary.slice(8, 16)}.${subnetMaskBinary.slice(16, 24)}.${subnetMaskBinary.slice(24)}`;
+            document.getElementById("subnetMaskOutput").textContent = `Subnet Mask: ${subnetMask}`;
+            document.getElementById("networkIPOutput").textContent = `Network IP: ${networkIP}`;
+            document.getElementById("broadcastIPOutput").textContent = `Broadcast IP: ${broadcastIP}`;
+        }
+
+        // Function to convert IP address to binary
+        function convertIPToBinary(ip) {
+            return ip.split(".").map((part) => parseInt(part).toString(2).padStart(8, "0")).join("");
+        }
+
+        // Function to convert binary to IP address
+        function convertBinaryToIP(binary) {
+            const parts = binary.match(/.{1,8}/g).map((part) => parseInt(part, 2));
+            return parts.join(".");
+        }
+
+        // Listen for changes in the input field and update the subnet information
+        document.getElementById("ipInput").addEventListener("input", updateSubnetInfo);
+
+        // Initial calculation when the page loads
+        updateSubnetInfo();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Calculation subnetMask</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Calculation subnetMask </a></li>
+                <li><a href="IP Address Generator.html">Generator IP</a></li>
+                <li><a href="IP Calculation.html">IP&Binary</a></li>
+                <li><a href="nb.html">N&B</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>หา Subnet Mask โดยคำนวณจากคน</h1>
+    <p>ใช้คำนวนจำนวนคนเพื่อหา subnetMask เช่น 32000 คน</p>
+    <div>
+        <label for="attendees">Number:</label>
+        <input type="text" id="attendees" placeholder="Enter number" oninput="calculateSubnetMask()">
+    </div>
+
+    <div id="result">
+        <h4>Output:</h4>
+        <p id="subnetMask"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>IP&Binary</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Calculation subnetMask </a></li>
+                <li><a href="IP Address Generator.html">Generator IP</a></li>
+                <li><a href="IP Calculation.html">IP&Binary</a></li>
+                <li><a href="nb.html">N&B</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>หา IP และ Binary</h2>
+        <p>ใส่ตัวเลขเพื่อหา ip เช่น /20 (ไม่ใช่จำนวนคน) เวลาใส่ไม่ต้องใส่ "/" ถ้าใส่จะ ERROR</p>
+        <label for="input">Enter the value:</label>
+        <input type="text" id="input" placeholder="Enter the value" oninput="calculate()" />
+        <div class="output">
+            <h4>Output:</h4>
+            <p id="binary"></p>
+            <p id="subnetMask"></p>
+            <p id="power"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
