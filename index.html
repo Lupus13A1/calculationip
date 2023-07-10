@@ -9,21 +9,33 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Calculation subnetMask </a></li>
-                <li><a href="IP Address Generator.html">Generator IP</a></li>
-                <li><a href="IP Calculation.html">IP&Binary</a></li>
-                <li><a href="nb.html">N&B</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">Calculation subnetMask</a>
+            </li>
+            <li>
+                <a href="IP Address Generator.html">Generator IP</a>
+            </li>
+            <li>
+                <a href="IP Calculation.html">IP&Binary</a>
+            </li>
+            <li>
+                <a href="nb.html">N&B</a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/bt._.beam/">Contact</a>
+            </li>
+
+        </ul>
+    </nav>
     <h1>หา Subnet Mask โดยคำนวณจากคน</h1>
     <p>ใช้คำนวนจำนวนคนเพื่อหา subnetMask เช่น 32000 คน</p>
-    <div>
-        <label for="attendees">Number:</label>
-        <input type="text" id="attendees" placeholder="Enter number" oninput="calculateSubnetMask()">
+
+    <div class="form_group field">
+        <input type="text"" class=" form_field" id="attendees" placeholder="Enter number"
+            oninput="calculateSubnetMask()">
+        <label for="attendees" class="form_label">Number:</label>
     </div>
 
     <div id="result">

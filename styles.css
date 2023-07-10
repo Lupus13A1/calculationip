@@ -1,80 +1,163 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    background-color: #ffffff;
+    /* default background color */
+    color: #000000;
+    /* default text color */
 }
 
-h1,
-h2 {
-    color: #333;
+.dark-mode body {
+    background-color: #000000;
+    /* dark mode background color */
+    color: #ffffff;
+    /* dark mode text color */
+}
+
+h1 {
+    color: inherit;
     font-size: 28px;
 }
 
-label {
-    font-weight: bold;
-    margin-right: 10px;
+p {
+    color: inherit;
 }
 
-input[type="text"] {
-    padding: 5px;
-    width: 150px;
+nav {
+    mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
 }
 
-button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+nav ul {
+    text-align: center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
-#result {
-    margin-top: 20px;
-}
-
-table {
-    margin-top: 20px;
-    border-collapse: collapse;
-}
-
-table td,
-table th {
-    border: 1px solid #ccc;
-    padding: 8px;
-}
-
-label {
-    display: block;
-    margin-top: 10px;
-}
-
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0.5rem 1.5rem;
-}
-
-a,
-button {
-    color: rgb(0, 0, 0);
-}
-
-.nav-links {
-    list-style: none;
-}
-
-.nav-links li {
+nav ul li {
     display: inline-block;
-    padding: 0 1.25rem;
 }
 
-.nav-links li a {
+nav ul li a {
+    padding: 18px;
+    text-transform: uppercase;
+    color: rgba(0, 35, 122, 0.5);
+    font-size: 18px;
     text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    transition: all 0.5s ease 0s;
+    display: block;
 }
 
-.nav-links li a:hover {
-    color: rgb(0, 242, 255);
+nav ul li a:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(0, 242, 255);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 35, 122, 0.7);
+}
+
+.dark-mode {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.dark-mode h1 {
+    color: inherit;
+}
+
+.dark-mode p {
+    color: inherit;
+}
+
+.dark-mode nav {
+    mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+}
+
+.dark-mode nav ul {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.dark-mode nav ul li a {
+    color: rgba(0, 35, 122, 0.5);
+}
+
+.dark-mode nav ul li a:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(0, 242, 255);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 35, 122, 0.7);
+}
+
+/* Media Queries */
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+
+    /* Adjustments for body, nav, or any other elements */
+    body {
+        margin: 10px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+}
+
+/* Additional media queries for different screen sizes or device types */
+.form_group {
+    position: relative;
+    padding: 20px 0 0;
+    width: 100%;
+    max-width: 180px;
+}
+
+.form_field {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 16px;
+    color: #000000;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.form_field::placeholder {
+    color: transparent;
+}
+
+.form_field:placeholder-shown~.form_label {
+    font-size: 17px;
+    cursor: text;
+    top: 20px;
+}
+
+.form_label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #9b9b9b;
+    pointer-events: none;
+}
+
+.form_field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #116399, #38caef);
+    border-image-slice: 1;
+}
+
+.form_field:focus~.form_label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #38caef;
+    font-weight: 700;
+}
+
+.form_field:required,
+.form_field:invalid {
+    box-shadow: none;
 }

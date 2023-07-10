@@ -1,4 +1,4 @@
-//start function calculateSubnetMask
+// Start function calculateSubnetMask
 function calculateSubnetMask() {
     var attendeesInput = document.getElementById("attendees");
     var subnetMaskOutput = document.getElementById("subnetMask");
@@ -42,10 +42,9 @@ function calculateSubnet(attendees) {
         binary: binarySubnetMask
     };
 }
+// End function calculateSubnetMask
 
-//end function calculateSubnetMask
-
-//start function IP Calculation
+// Start function calculate
 function calculate() {
     var input = parseInt(document.getElementById("input").value);
 
@@ -85,20 +84,20 @@ function formatBinary(binary) {
     }
     return formatted.slice(0, -1);
 }
-//end function IP Calculation
+// End function calculate
 
-//start generateIPs
+// Start function generateIPs
 function generateIPs() {
-    var ipAddress = document.getElementById('ipAddress').value;
+    var ipAddress = document.getElementById("ipAddress").value;
 
-    var ipParts = ipAddress.split('.');
+    var ipParts = ipAddress.split(".");
     ipParts = ipParts.map(function (part) {
         return parseInt(part);
     });
 
     var generatedIPs = [];
     for (var i = 0; i < 6; i++) {
-        generatedIPs.push(ipParts.join('.'));
+        generatedIPs.push(ipParts.join("."));
         ipParts[3] += 1;
         if (ipParts[3] > 255) {
             ipParts[3] = 0;
@@ -114,24 +113,24 @@ function generateIPs() {
         }
     }
 
-    var resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = '';
+    var resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
 
     if (generatedIPs.length > 0) {
-        var table = document.createElement('table');
-        var headerRow = document.createElement('tr');
-        var headerCell1 = document.createElement('th');
-        var headerCell2 = document.createElement('th');
-        headerCell1.textContent = 'Generated IP Address';
-        headerCell2.textContent = 'Index';
+        var table = document.createElement("table");
+        var headerRow = document.createElement("tr");
+        var headerCell1 = document.createElement("th");
+        var headerCell2 = document.createElement("th");
+        headerCell1.textContent = "Generated IP Address";
+        headerCell2.textContent = "Index";
         headerRow.appendChild(headerCell1);
         headerRow.appendChild(headerCell2);
         table.appendChild(headerRow);
 
         for (var j = 0; j < generatedIPs.length; j++) {
-            var row = document.createElement('tr');
-            var cell1 = document.createElement('td');
-            var cell2 = document.createElement('td');
+            var row = document.createElement("tr");
+            var cell1 = document.createElement("td");
+            var cell2 = document.createElement("td");
             cell1.textContent = generatedIPs[j];
             cell2.textContent = j + 1;
             row.appendChild(cell1);
@@ -141,12 +140,53 @@ function generateIPs() {
 
         resultDiv.appendChild(table);
     } else {
-        resultDiv.textContent = 'No IP addresses generated.';
+        resultDiv.textContent = "No IP addresses generated.";
     }
 }
 
-var ipAddressInput = document.getElementById('ipAddress');
-ipAddressInput.addEventListener('input', generateIPs);
-//end generateIPs
+var ipAddressInput = document.getElementById("ipAddress");
+ipAddressInput.addEventListener("input", generateIPs);
+// End function generateIPs
+
+// Function to calculate and update the subnet information
+function updateSubnetInfo() {
+    const input = document.getElementById("ipInput").value;
+    const [ip, cidr] = input.split("/");
+
+    // Calculate subnet mask in binary
+    const subnetMaskBinary = "1".repeat(cidr).padEnd(32, "0");
+    const subnetMask = convertBinaryToIP(subnetMaskBinary);
+
+    // Calculate network and broadcast IPs
+    const ipBinary = convertIPToBinary(ip);
+    const networkIPBinary = ipBinary.substr(0, cidr).padEnd(32, "0");
+    const broadcastIPBinary = ipBinary.substr(0, cidr).padEnd(32, "1");
+    const networkIP = convertBinaryToIP(networkIPBinary);
+    const broadcastIP = convertBinaryToIP(broadcastIPBinary);
+
+    // Output results
+    document.getElementById("binaryOutput").textContent = `Binary: ${subnetMaskBinary.slice(0, 8)}.${subnetMaskBinary.slice(8, 16)}.${subnetMaskBinary.slice(16, 24)}.${subnetMaskBinary.slice(24)}`;
+    document.getElementById("subnetMaskOutput").textContent = `Subnet Mask: ${subnetMask}`;
+    document.getElementById("networkIPOutput").textContent = `Network IP: ${networkIP}`;
+    document.getElementById("broadcastIPOutput").textContent = `Broadcast IP: ${broadcastIP}`;
+}
+
+// Function to convert IP address to binary
+function convertIPToBinary(ip) {
+    return ip.split(".").map((part) => parseInt(part).toString(2).padStart(8, "0")).join("");
+}
+
+// Function to convert binary to IP address
+function convertBinaryToIP(binary) {
+    const parts = binary.match(/.{1,8}/g).map((part) => parseInt(part, 2));
+    return parts.join(".");
+}
+
+// Listen for changes in the input field and update the subnet information
+document.getElementById("ipInput").addEventListener("input", updateSubnetInfo);
+
+// Initial calculation when the page loads
+updateSubnetInfo();
+
 
 
